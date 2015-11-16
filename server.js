@@ -1,3 +1,4 @@
+require("use-strict")
 var Glue = require('glue');
 var manifest = require('./manifest');
 
