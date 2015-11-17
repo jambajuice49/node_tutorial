@@ -16,6 +16,7 @@ Glue.compose(manifest.get('/'), options, function (err, server) {
     }
     server.start(function () {
         console.log(process.env.IP)
+        console.log(process.env.PORT)
         console.log('Hapi days!');
     });
 });

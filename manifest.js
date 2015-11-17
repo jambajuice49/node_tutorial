@@ -9,7 +9,7 @@ var manifest = {
     },
     connections: [{
         host: process.env.IP,
-        port: 8081,
+        port: process.env.PORT || 8081,
         labels: ['api']
     }
     ],
