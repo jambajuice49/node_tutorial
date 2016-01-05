@@ -16,6 +16,28 @@ var manifest = {
     plugins: []
 }
 
+ var basePlugins = [ 
+    {
+    'hapi-sequelize': {
+                database: 'test1',
+                user: 'postgres',
+                pass: 'pass',
+                dialect: 'postgres',
+                port: 5432,
+                models: './server/api/models/**/*.js',
+                sequelize: {
+                    define: {
+                        underscoredAll: true
+                    }
+                }
+            }
+    },{
+        'inert': {}
+    },{
+        'vision': {}
+    }
+];
+
 var endpointsToLoad = glob.sync('server/api/*.js', {}).map(file => {
     let fileName = './' + file
     let endpointConfig = {};
@@ -25,6 +47,6 @@ var endpointsToLoad = glob.sync('server/api/*.js', {}).map(file => {
     return endpointConfig;
     });
 
-manifest.plugins = [].concat(endpointsToLoad)
+manifest.plugins = [].concat(basePlugins, endpointsToLoad)
 
 module.exports = new Confidence.Store(manifest);

@@ -1,0 +1,5 @@
+var models = require('./joemodels');
+
+exports.hello = {
+    models.Hello.findAll();
+}
