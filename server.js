@@ -1,7 +1,11 @@
 require("use-strict")
 var Glue = require('glue');
 var manifest = require('./manifest');
+var Handlebars = require('handlebars');
+var HandlebarsLayouts = require('handlebars-layouts');
 
+var engine = Handlebars.create();
+HandlebarsLayouts.register(engine);
 
 var options = {
     relativeTo: __dirname
@@ -16,10 +20,11 @@ Glue.compose(manifest.get('/', {env: 'test'}), options, function (err, server) {
     }
     server.views({
         engines: {
-            html: require('handlebars')
+            html: engine
         },
         relativeTo: __dirname,
-        path: 'server/static_pages'
+        path: 'server/static_pages',
+        partialsPath: 'server/views'
     });
     server.start(function () {
         var db = server.plugins['hapi-sequelize'].db;
