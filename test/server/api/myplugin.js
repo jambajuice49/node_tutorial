@@ -7,6 +7,11 @@ var Lab = require('lab');
 var lab = exports.lab = Lab.script();
 var myplugin = require('../../../server/api/myplugin')
 var visionPlugin = require('vision')
+var Handlebars = require('handlebars');
+var HandlebarsLayouts = require('handlebars-layouts');
+
+var engine = Handlebars.create();
+HandlebarsLayouts.register(engine);
 
 var server;
 var helloRequest = {
@@ -16,21 +21,21 @@ var helloRequest = {
 
 var helpRequest = {
     method: 'GET',
-    url: '/static_p/help'
+    url: '/app/help'
 }
 
 var homeRequest = {
     method: 'GET',
-    url: '/static_p/home'
+    url: '/app/home'
 }
 
 var aboutRequest = {
     method: 'GET',
-    url: '/static_p/about'
+    url: '/app/about'
 }
 var missingPageRequest = {
     method: 'GET',
-    url: '/static_p/jack'
+    url: '/app/jack'
 }
 
 lab.before(done => {
@@ -42,10 +47,11 @@ lab.before(done => {
     server.register(plugins, done);
     server.views({
         engines: {
-            html: require('handlebars')
+            html: engine
         },
         relativeTo: __dirname,
-        path: '../../../server/static_pages'
+        path: '../../../server/static_pages',
+        partialsPath: '../../../server/views'
     });
 });
 
@@ -97,7 +103,7 @@ lab.experiment('my first experiment', () => {
             console.log("I'm here joe");
             var $ = Cheerio.load(response.payload)
             console.log($.html());
-            Code.expect(response.statusCode).to.equal(407);
+            Code.expect(response.statusCode).to.equal(404);
             done();
         });
     });

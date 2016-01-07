@@ -34,7 +34,7 @@ exports.register = function (server, options, next) {
             if (title == null || title == undefined)
                 reply().code(404);
             else
-                reply.view(request.params.name);
+                reply.view(request.params.name, {Title: title});
         }
     })
     server.route(routes)
