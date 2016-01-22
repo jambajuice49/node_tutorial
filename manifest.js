@@ -24,7 +24,7 @@ var manifest = {
                 // pass: 'pass',
                 // dialect: 'postgres',
                 // port: 5432,
-                uri: process.env.DATABASE_URL
+                uri: process.env.DATABASE_URL,
                 models: './server/api/models/**/*.js',
                 sequelize: {
                     define: {
