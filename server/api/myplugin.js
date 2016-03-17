@@ -27,14 +27,24 @@ exports.register = function (server, options, next) {
     
     routes.push({
         method: 'GET',
+        path: '/app',
+        handler: function(request, reply){
+            console.log("in the new app get");
+            reply.view("home", {});
+        }
+    });
+    
+    routes.push({
+        method: 'GET',
         path: '/app/{name}',
         handler: function(request, reply){
             var title = static_pages[request.params.name];
             console.log("the title is " + title);
-            if (title == null || title == undefined)
-                reply().code(404);
-            else
-                reply.view(request.params.name, {Title: title});
+            reply.view(request.params.name, {Title: title});
+            // if (title == null || title == undefined)
+            //     reply().code(404);
+            // else
+            //     reply.view(request.params.name, {Title: title});
         }
     })
     server.route(routes)

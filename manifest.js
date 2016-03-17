@@ -19,12 +19,12 @@ var manifest = {
  var basePlugins = [ 
     {
     'hapi-sequelize': {
-                // database: 'test1',
-                // user: 'postgres',
-                // pass: 'pass',
-                // dialect: 'postgres',
-                // port: 5432,
-                uri: process.env.DATABASE_URL,
+                database: 'test1',
+                user: 'postgres',
+                pass: 'pass',
+                dialect: 'postgres',
+                port: 5432,
+                // uri: process.env.DATABASE_URL,
                 models: './server/api/models/**/*.js',
                 sequelize: {
                     define: {

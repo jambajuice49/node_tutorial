@@ -24,7 +24,8 @@ Glue.compose(manifest.get('/', {env: 'test'}), options, function (err, server) {
         },
         relativeTo: __dirname,
         path: 'server/static_pages',
-        partialsPath: 'server/views'
+        partialsPath: 'server/views',
+        helpersPath: 'server/views/helpers'
     });
     server.start(function () {
         var db = server.plugins['hapi-sequelize'].db;
